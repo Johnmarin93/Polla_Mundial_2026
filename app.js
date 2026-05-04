@@ -13,3 +13,6 @@ app.listen(PORT, () => {
 // Rutas
 import userRoutes from "./routes/user.routes.js";
 app.use("/api/users", userRoutes);
+app.get("/", (req, res) => {
+  res.send("API funcionando 🚀");
+});

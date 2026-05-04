@@ -17,8 +17,4 @@ router.post("/login", login);
 // Ruta protegida para obtener el perfil del usuario
 router.get("/perfil", verificarToken, perfil);
 
-app.get("/", (req, res) => {
-  res.send("API funcionando 🚀");
-});
-
 export default router;
