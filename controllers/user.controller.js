@@ -19,7 +19,12 @@ export const registrarUsuario = async (req, res) => {
     });
     res.json(usuario);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("ERROR COMPLETO:", error);
+
+    res.status(500).json({
+      error: error.message,
+      detalle: error,
+    });
   }
 };
 
