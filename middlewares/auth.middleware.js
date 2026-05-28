@@ -19,3 +19,19 @@ export const verificarToken = (req, res, next) => {
     res.status(401).json({ error: "Token inválido" });
   }
 };
+
+export const adminOnly = (
+  req,
+
+  res,
+
+  next,
+) => {
+  if (req.usuario.rol_id !== 1) {
+    return res.status(403).json({
+      error: "Acceso denegado",
+    });
+  }
+
+  next();
+};

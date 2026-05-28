@@ -3,6 +3,8 @@ import {
   registrarUsuario,
   login,
   perfil,
+  getUserStats,
+  changePassword,
 } from "../controllers/user.controller.js";
 import { verificarToken } from "../middlewares/auth.middleware.js";
 
@@ -16,5 +18,20 @@ router.post("/login", login);
 
 // Ruta protegida para obtener el perfil del usuario
 router.get("/perfil", verificarToken, perfil);
+
+router.get(
+  "/stats",
+
+  verificarToken,
+
+  getUserStats,
+);
+router.put(
+  "/change-password",
+
+  verificarToken,
+
+  changePassword,
+);
 
 export default router;

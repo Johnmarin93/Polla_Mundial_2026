@@ -9,6 +9,7 @@ export const generarToken = (usuario) => {
       id: usuario.id,
       email: usuario.email,
       nombre: usuario.nombre,
+      rol_id: usuario.rol_id,
     },
     secretKey,
     { expiresIn: "1h" }, // El token expirará en 1 hora
