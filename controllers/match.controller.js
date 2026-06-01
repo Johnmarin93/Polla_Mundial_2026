@@ -13,13 +13,22 @@ import { updateUserTotalPoints } from "../services/user.service.js";
 
 export const getMatches = async (req, res) => {
   try {
-    const result = await pool.query(
-      `
-      SELECT *
+    const result = await pool.query(`
+      SELECT
+        id,
+        home_team,
+        away_team,
+        home_team_code,
+        away_team_code,
+        group_name,
+        status,
+        home_score,
+        away_score,
+        stadium,
+        TO_CHAR(match_date, 'YYYY-MM-DD HH24:MI:SS') AS match_date
       FROM matches
       ORDER BY match_date ASC
-      `,
-    );
+    `);
 
     res.json(result.rows);
   } catch (error) {
