@@ -29,7 +29,7 @@ export const getMatches = async (req, res) => {
       FROM matches
       ORDER BY match_date ASC
     `);
-
+    console.log(result.rows[1].match_date);
     res.json(result.rows);
   } catch (error) {
     console.log(error);

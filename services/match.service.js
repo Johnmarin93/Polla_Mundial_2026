@@ -39,19 +39,28 @@ export const getMatchesService = async () => {
 };
 
 export const getUpcomingMatches = async () => {
-  const res = await pool.query(
-    `
-        SELECT *
+  const res = await pool.query(`
+    SELECT
+      id,
+      home_team,
+      away_team,
+      home_team_code,
+      away_team_code,
+      group_name,
+      status,
+      home_score,
+      away_score,
+      stadium,
+      TO_CHAR(match_date, 'YYYY-MM-DD HH24:MI:SS') AS match_date
 
-        FROM matches
+    FROM matches
 
-        WHERE status = 'scheduled'
+    WHERE status = 'scheduled'
 
-        ORDER BY match_date ASC
+    ORDER BY match_date ASC
 
-        LIMIT 4
-        `,
-  );
+    LIMIT 4
+  `);
 
   return res.rows;
 };
