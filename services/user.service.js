@@ -1,15 +1,7 @@
 import pool from "../config/db.js";
 
 export const crearUsuario = async (user) => {
-  const {
-    nombre,
-
-    email,
-
-    password,
-
-    rol_id,
-  } = user;
+  const { nombre, email, password } = user;
 
   const res = await pool.query(
     `
@@ -22,7 +14,7 @@ export const crearUsuario = async (user) => {
         )
 
         VALUES
-        ($1, $2, $3, $4)
+        ($1, $2, $3, 2)
 
         RETURNING
         nombre,
@@ -30,7 +22,7 @@ export const crearUsuario = async (user) => {
         rol_id
         `,
 
-    [nombre, email, password, rol_id],
+    [nombre, email, password],
   );
 
   return res.rows[0];

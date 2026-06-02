@@ -10,7 +10,7 @@ import { generarToken } from "../utils/jwt.js";
 
 export const registrarUsuario = async (req, res) => {
   try {
-    const { nombre, email, password, rol_id } = req.body;
+    const { nombre, email, password } = req.body;
 
     const hashed = await hashPassword(password);
 
@@ -18,7 +18,6 @@ export const registrarUsuario = async (req, res) => {
       nombre,
       email,
       password: hashed,
-      rol_id,
     });
     res.json(usuario);
   } catch (error) {
