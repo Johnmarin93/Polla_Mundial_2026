@@ -19,7 +19,7 @@ export const registrarUsuario = async (req, res) => {
       email,
       password: hashed,
     });
-    res.json(usuario);
+    res.json("Usuario registrado exitosamente");
   } catch (error) {
     if (error.code === "23505") {
       return res.status(400).json({
