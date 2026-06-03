@@ -1,33 +1,42 @@
-export const calculatePoints = (
-  prediction,
+export const calculatePoints = (prediction, match) => {
+  const predictedHome = prediction.predicted_home_score;
+  const predictedAway = prediction.predicted_away_score;
 
-  match,
-) => {
-  const exactScore =
-    prediction.predicted_home_score === match.home_score &&
-    prediction.predicted_away_score === match.away_score;
+  const realHome = match.home_score;
+  const realAway = match.away_score;
 
-  if (exactScore) {
-    return 3;
+  // 5 puntos → Marcador exacto
+  if (predictedHome === realHome && predictedAway === realAway) {
+    return 5;
   }
 
   const realWinner =
-    match.home_score > match.away_score
-      ? "home"
-      : match.home_score < match.away_score
-        ? "away"
-        : "draw";
+    realHome > realAway ? "home" : realHome < realAway ? "away" : "draw";
 
   const predictedWinner =
-    prediction.predicted_home_score > prediction.predicted_away_score
+    predictedHome > predictedAway
       ? "home"
-      : prediction.predicted_home_score < prediction.predicted_away_score
+      : predictedHome < predictedAway
         ? "away"
         : "draw";
 
-  if (realWinner === predictedWinner) {
-    return 1;
+  const realDifference = realHome - realAway;
+
+  const predictedDifference = predictedHome - predictedAway;
+
+  // 3 puntos → ganador + diferencia exacta
+  if (
+    realWinner === predictedWinner &&
+    realDifference === predictedDifference
+  ) {
+    return 3;
   }
 
+  // 2 puntos → solo tendencia
+  if (realWinner === predictedWinner) {
+    return 2;
+  }
+
+  // 0 puntos → error total
   return 0;
 };
