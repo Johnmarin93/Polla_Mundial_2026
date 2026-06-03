@@ -19,8 +19,8 @@ export const getRanking = async () => {
     LEFT JOIN predictions
 
       ON users.id = predictions.user_id
-
-    GROUP BY users.id
+    WHERE users.rol_id != 1
+    GROUP BY users.id, users.nombre
 
     ORDER BY total_points DESC
     `,
