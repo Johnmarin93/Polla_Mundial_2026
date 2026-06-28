@@ -7,7 +7,7 @@ export const calculatePoints = (prediction, match) => {
 
   // 5 puntos → marcador exacto
   if (predictedHome === realHome && predictedAway === realAway) {
-    return 5;
+    return 10;
   }
 
   const realWinner =
@@ -22,7 +22,7 @@ export const calculatePoints = (prediction, match) => {
 
   // Empate no exacto = 2 puntos
   if (realWinner === "draw" && predictedWinner === "draw") {
-    return 2;
+    return 4;
   }
 
   const realDifference = realHome - realAway;
@@ -34,12 +34,12 @@ export const calculatePoints = (prediction, match) => {
     realWinner === predictedWinner &&
     realDifference === predictedDifference
   ) {
-    return 3;
+    return 6;
   }
 
   // 2 puntos → solo ganador
   if (realWinner === predictedWinner) {
-    return 2;
+    return 4;
   }
 
   // 0 puntos
