@@ -2,8 +2,8 @@ import pool from "../config/db.js";
 
 export const createPrediction = async (req, res) => {
   try {
-    const { user_id, match_id, predicted_home_score, predicted_away_score } =
-      req.body;
+    const user_id = req.usuario.id;
+    const { match_id, predicted_home_score, predicted_away_score } = req.body;
 
     const result = await pool.query(
       `
@@ -47,7 +47,7 @@ export const createPrediction = async (req, res) => {
 
 export const getUserPredictions = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const userId = req.usuario.id;
 
     const result = await pool.query(
       `
